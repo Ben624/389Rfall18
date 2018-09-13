@@ -17,10 +17,10 @@ Digital acknowledgement of honor pledge: Ben Eisner
 
 2. The first thing I did was check the given username `kruegster1990` on `checkusernames.com`. Since this was the website given in class, it seemed like the best place to start. This site led me to his Twitter and Reddit pages. The reddit page didn't contain any information, however, the Twitter page was very helpful. In addition to giving his name, it also contained some personal information as well as a link to his [website](http://cornerstoneairlines.co). I also typed in his username into facebook, but didn't get any results. However, I did find his instagram page after doing a search for it on Instagram. Based on his Instagram images, it seems like he also has an interest for Pokemon.
 
-  > **Twitter** https://twitter.com/kruegster1990 <br>
+  > **Twitter:** https://twitter.com/kruegster1990 <br>
    **Reddit:** https://www.reddit.com/user/kruegster1990 <br>
    **Personal Info:** Born in 1990, From Silver Spring,MD <br>
-   **Interests** Planes, Flying, Pokemon
+   **Interests:** Planes, Flying, Pokemon
 
 
 3. To find the IP Address of the webserver, I did a reverse DNS lookup on `ultratools.com`. From this, I learned that the IP address of cornerstoneairlines.co is `142.93.118.186`.  
@@ -33,7 +33,6 @@ Digital acknowledgement of honor pledge: Ben Eisner
 | Dir  | /.git/          |
 | Dir  | /secret/        |
 | Dir  | /server-status/ |
-| Dir  | /.git/          |
 
 After seeing the `/.git/` directory, I decided to go through the files inside. In the 'COMMIT_EDITMSG', I found the flag `CMSC389R-{y0u_found_th3_g1t_repo}`
 
@@ -65,4 +64,4 @@ Since Fred's username for several of his accounts was `kruegster1990`, I thought
 
 One of the things that was mentioned in class was that people tend to leave traces of important information on sites like github or pastebin. Since I had already found the `/.git/` folder, I thought it would be a good place to look. I found that in `/logs/HEAD`, there was an e-mail address kruegster@tutanota.com . Later on realized that this e-mail address was also in the about section on the website. After seeing this e-mail address, I decided to try running the bruteforce program again, but with `kruegster` as the username. This time around, in just a few minutes, I was able to get the password `pokemon`. This password wasn't really a huge surprise thinking back to his Instagram page.
 
-All that was left was finding the flight record on the system. Since I now had the username, password, IP, and port, gaining access to a terminal was accomplished just by entering `nc 142.93.117.193 1337`. After I logged in, it looked like I was in a linux shell. Executing `ls` seemed like a good way to start so I could see the files and directories. It looked like a fairly standard linux system, so I thought checking the home directory would be a good idea. Upon cd'ing into the home directory, I saw that there was a `flight_records` folder which contained many text files. At first, I was originally thinking of making another bruteforce program that would open each text file and check each line for `CMSC`, which would indicate a flag. However, I then remembered that among all of Fred's pokemon pictures on Instagram, there were three pictures in a row which resembled a ticket. On the second ticket image, there was the code `AAC27670`. Upon looking back in the flight records files, I saw that there was a file named `AAC27670.txt`. I tried to open the file with vim, but nothing happened, so I just typed in `cat AAC27670.txt`instead and received the flag `CMSC389R-{c0rn3rstone-air-27670}`. I went through several more directories in the terminal, but didn't find any additional flags. 
+All that was left was finding the flight record on the system. Since I now had the username, password, IP, and port, gaining access to a terminal was accomplished just by entering `nc 142.93.117.193 1337`. After I logged in, it looked like I was in a linux shell. Executing `ls` seemed like a good way to start so I could see the files and directories. It looked like a fairly standard linux system, so I thought checking the home directory would be a good idea. Upon cd'ing into the home directory, I saw that there was a `flight_records` folder which contained many text files. At first, I was originally thinking of making another bruteforce program that would open each text file and check each line for `CMSC`, which would indicate a flag. However, I then remembered that among all of Fred's pokemon pictures on Instagram, there were three pictures in a row which resembled a ticket. On the second ticket image, there was the code `AAC27670`. Upon looking back in the flight records files, I saw that there was a file named `AAC27670.txt`. I tried to open the file with vim, but nothing happened, so I just typed in `cat AAC27670.txt`instead and received the flag `CMSC389R-{c0rn3rstone-air-27670}`. I went through several more directories in the terminal, but didn't find any additional flags.
