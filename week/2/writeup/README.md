@@ -47,4 +47,22 @@ After seeing the `/.git/` directory, I decided to go through the files inside. I
 
 ### Part 2 (55 pts)
 
-*REPLACE THIS TEXT WITH A BRIEF EXPLANATION OF YOUR APPROACH TO SOLVING THIS CHALLENGE, AND THE OUTCOME*
+After the lecture in class on Friday, it seemed like the first thing that I had to do was find some available ports that I would be able to hack. I decided to use nmap to find the open ports. Given that there was a seperate IP address for the admin page on the website, I decided to run nmap using that IP address. I was using Windows at the time so I used the nmap gui app. After running nmap with the ``intense scan, all TCP ports profile``, I got the following results.
+
+| Port | Protocol |State     | Service   | Version           |
+|------|----------|----------|-----------|-------------------|
+| 80   | tcp      | Open     | http      |Apache httpd 2.4.18|
+| 1337 | tcp      | Open     | waste     |N/A                |
+| 2222 | tcp      | Open     | ssh       |OpenSSH7.2p2       |
+|10010 | tcp      | Open     | rxapi     |N/A                |
+| 11211| tcp      | Filtered | memcache  |N/A                |
+
+From these results, I decided to first try to nc into the ssh port with the command ``nc 142.93.117.193 2222``. I didn't have any luck with this so I decided to try again with the 1337 port. That ended up working, and I was prompted with a username and password in terminal. This seemed like the place that I wanted to be, so I then went on to make the bruteforce program to figure out the password.
+
+After playing around with the sockets in python, I got the program working to the point where a username and password could be sent, and the corresponding result was received to the result variable *(See Stub.py)*. I wasn't sure what would be returned if the result wasn't `Fail`, so I made the if statement check `if result != "Fail\n"` instead of something like `if result != "success\n"`. I then went on to implement the program being able to read `rockyou.txt` and loop through each password until the result wasn't `Fail`.
+
+Since Fred's username for several of his accounts was `kruegster1990`, I thought that would be the username for the admin login. I inputted that username into the program and let it run. After several hours of it working, I was starting to think that it was the wrong username, but just to be safe, I decided to let it run overnight. After not seeing the program still run into the morning, I decided to stop the program and try to find another possible login.
+
+One of the things that was mentioned in class was that people tend to leave traces of important information on sites like github or pastebin. Since I had already found the `/.git/` folder, I thought it would be a good place to look. I found that in `/logs/HEAD`, there was an e-mail address kruegster@tutanota.com . Later on realized that this e-mail address was also in the about section on the website. After seeing this e-mail address, I decided to try running the bruteforce program again, but with `kruegster` as the username. This time around, in just a few minutes, I was able to get the password `pokemon`. This password wasn't really a huge surprise thinking back to his Instagram page.
+
+All that was left was finding the flight record on the system. Since I now had the username, password, IP, and port, gaining access to a terminal was accomplished just by entering `nc 142.93.117.193 1337`. After I logged in, it looked like I was in a linux shell. Executing `ls` seemed like a good way to start so I could see the files and directories. It looked like a fairly standard linux system, so I thought checking the home directory would be a good idea. Upon cd'ing into the home directory, I saw that there was a `flight_records` folder which contained many text files. At first, I was originally thinking of making another bruteforce program that would open each text file and check each line for `CMSC`, which would indicate a flag. However, I then remembered that among all of Fred's pokemon pictures on Instagram, there were three pictures in a row which resembled a ticket. On the second ticket image, there was the code `AAC27670`. Upon looking back in the flight records files, I saw that there was a file named `AAC27670.txt`. I tried to open the file with vim, but nothing happened, so I just typed in `cat AAC27670.txt`instead and received the flag `CMSC389R-{c0rn3rstone-air-27670}`. I went through several more directories in the terminal, but didn't find any additional flags. 

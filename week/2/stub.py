@@ -8,7 +8,7 @@ wordlist = "rockyou.txt"
 def brute_force():
 
     file = open(wordlist,"r")
-    username = "kruegster" 
+    username = "kruegster"
 
 
     for password in file:
