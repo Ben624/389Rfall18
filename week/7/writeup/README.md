@@ -26,4 +26,21 @@ Digital acknowledgement of honor pledge: Ben Eisner
 
 ### Part 2 (55 pts)
 
-*SUBMIT YOUR WRITEUP DETAILING YOUR APPROACH AND SOLUTION TO THIS PROBLEM HERE (>250 words). Dont forget to include the flag!*
+Because we are supposed to be reverse engineering a binary file, it seemed like the best choice would be to open up the file in cutter, since it was one of the applications we discussed during the Binaries-II lecture. After opening up the file in cutter, I noticed this interesting block of code while scrolling through the file.   
+```
+|           0x00000790      mov  byte [local_13h], 0x74 ; 't'
+|           0x00000794      mov  byte [local_12h], 0x6d ; 'm'
+|           0x00000798      mov  byte [local_11h], 0x70 ; 'p'
+|           0x0000079c      mov  byte [local_10h], 0x2f ; '/'
+|           0x000007a0      mov  byte [local_fh], 0x2e ; '.'
+|           0x000007a4      mov  byte [local_eh], 0x73 ; 's'
+|           0x000007a8      mov  byte [local_dh], 0x74 ; 't'
+|           0x000007ac      mov  byte [local_ch], 0x65 ; 'e'
+|           0x000007b0      mov  byte [local_bh], 0x67 ; 'g'
+|           0x000007b4      mov  byte [local_ah], 0x6f ; 'o'
+```
+From this, it looks like these lines of code are referencing something at the location `tmp/.stego`. I decided to execute the binary file by typing `./binary` in terminal, then went to the tmp directory to see what appeared. I tried using `cat` and `strings` on the file, but didn't see anything that resembled a flag.
+
+I then executed `file .stego` to see if I could get information about the file (like in part 1), but only got `.stego: data`, which wasn't very helpful. I then tried using binwalk, which returned the following description `JPEG image data, JFIF standard 1.01`. I wasn't sure what a JFIF was, so I did some researching and found that *Valid JFIF files begin with FF D8 FF E0 ?? ?? 'J' 'F' 'I' 'F' 00* from [this](http://fileformats.archiveteam.org/wiki/JFIF) website. Given that information, I thought it would be a good idea to open up the file in a hex editor and noticed that there was an extra 00 at the beginning. After removing this I saved the file and was able to open it up and saw that it was a picture of a stegosaurus.
+
+After seeing the type of dino, it seemed like this was a hint to use steganography to extract a flag from the image. So, I used the `steghide extract` command. When it prompted me for a password, I tried a few different things including steganography, dinosaur, and cmsc. Then, I tried stegosaurus, which resulted in a new file being created which gave me the flag **CMSC389R-{dropping_files_is_fun}**
