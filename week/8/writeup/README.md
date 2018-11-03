@@ -46,17 +46,50 @@ thanks, see you tomorrow
 6. Yes, they did send a link `https://drive.google.com/file/d/1McOX5WjeVHNLyTBNXqbOde7l8SAQ3DoI/view?usp=sharing` in the chat window. This file has a .fpff extension which after doing a google search appears to be the Forensics Playground File Format.
 
 
-7. From the chat message chain, the two hackers are planning on meeting eachother tomorrow at 1500. 
+7. From the chat message chain, the two hackers are planning on meeting eachother tomorrow at 1500.
 
 ### Part 2 (55 Pts)
 
 *Report your answers to the questions about parsing update.fpff below.*
-1.
+1. With the `struct.unpack` function, I received a timestamp with the value **1540428007**. I then found a Epoch converter online and copied the number. This resulted in the timestamp `Thursday, October 25, 2018 12:40:07 AM`.
 
-2.
+2. With the `struct.unpack` function, I found that the author is `laz0rh4x`.
 
-3.
+3. According to the result from `struct.unpack`, there are 9 sections. However, after counting up all sections that were printed in the body section of the stub.py program, it appears that there are actually 11 sections.
 
 4.
 
-5.
+*Type:ASCII -- Section:1*:
+ `Call this number to get your flag: (422) 537 - 79461`
+
+*Type:WORDS -- Section:2*:
+ `[3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9]`
+
+*Type:COORDS -- Section:3*:
+`[38.99161, -77.02754]`
+
+*Type:REFERENCE -- Section:4*:
+`[1]`
+
+*Type:ASCII -- Section:5*:
+`The imfamous security pr0s at CMSC389R will never find this!`
+
+*Type:ASCII -- Section:6*:
+`The first recorded uses of steganography Can be traced back to 440 BC when Herodotus Mentions two exampleS in his Histories.[3] Histicaeus s3nt a message to his vassal, Arist8goras, by sha9ving the hRead of his most trusted servan-t, "marking" the message onto his scal{p, then sending him on his way once his hair had rePrown, withl the inastructIon, "WheN thou art come to Miletus, bid _Aristagoras shave thy head, and look thereon." Additionally, demaratus sent a warning about a forthcoming attack to Greece by wrIting it dirfectly on the wooden backing oF a wax tablet before applying i_ts beeswax surFace. Wax tablets were in common use then as reusabLe writing surfAces, sometimes used for shorthand. In his work Polygraphiae Johannes Trithemius developed his so-called "Ave-Maria-Cipher" that can hide information in a Latin praise of God. "Auctor Sapientissimus Conseruans Angelica Deferat Nobis Charitas Gotentissimi Creatoris" for example contains the concealed word VICIPEDIA.[4}`
+
+*Type:COORDS -- Section:7*:
+`[38.9910941, -76.9328019]`
+
+*Type:PNG -- Section:8*:
+![alt text](https://raw.githubusercontent.com/Ben624/389Rfall18/master/week/8/writeup/output.png "Output")
+
+*Type:ASCII -- Section:9*:
+`AF(saSAdf1AD)Snz**asd1`
+
+*Type:ASCII -- Section:10*:
+`Q01TQzM4OVIte2gxZGQzbi1zM2N0MTBuLTFuLWYxbDN9`
+
+*Type:DWORDS -- Section:11*:
+`[4, 8, 15, 16, 23, 42]`
+
+5. The PNG image gives you the flag `CMSC389R-{c0rn3rst0ne_airlin3s_to_the_m00n}`. To get this valid PNG to save, I realized that the File Signature was missing. To fix this issue, I addded the signature `(0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A)` in front of the struct.unpack for the PNG image. 

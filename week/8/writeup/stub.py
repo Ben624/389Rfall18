@@ -80,7 +80,7 @@ SECTION_ASCII = 0x9
 
 # Additional PNG Signature
 
-PNG_HEX_SIG = (0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A,)
+PNG_HEX_SIG = (0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A)
 DATA_LENGTH = len(data)
 
 # Offset
@@ -97,7 +97,7 @@ while offset_start < DATA_LENGTH:
     num_sections += 1
     offset_end = offset_start + 8
     (type, length) = struct.unpack('<LL', data[offset_start:offset_end])
-    print '\nType:%s -- Count:%d' % (get_type(type), num_sections)
+    print '\nType:%s -- Section:%d' % (get_type(type), num_sections)
 
     # ********PNG********
     if type == SECTION_PNG:
