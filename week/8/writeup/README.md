@@ -37,15 +37,16 @@ thanks, see you tomorrow
 
 <laz0rh4x> good luck, don't be late
 ```  
-3.
+3. After I closed out of the TCP Follow Window, I noticed that the filter `tcp.stream eq 2` was inputted. It looks like this filter contains all of the contents of the chat between the hackers. After looking at the source column, I noticed that there are two IP address used to send attacks to Cornerstone Airlines. These two IP addresses are *206.189.113.189* and *142.93.118.186*. After getting these IP's I decided to use IPlocation.net to get the location of these two addresses. *206.189.113.189* is located in **London, England** and *142.93.118.186* is located in **New Jersey**.
 
-4.
+4. From the Info section of the list from the *tcp.stream eq 2*, I saw that the two ports being used are 2749 and 53878.
 
-5.
+5. Yes, from the chat it seems like these two hackers are discussing some updated plans, which would indicate that some plans were changed for some unknown reason. My guess is that they are planning out a plan to hack Cornerstone Airlines. Also according to their message chain, it will take place *tomorrow at 1500* which is 3pm.
 
-6.
+6. Yes, they did send a link `https://drive.google.com/file/d/1McOX5WjeVHNLyTBNXqbOde7l8SAQ3DoI/view?usp=sharing` in the chat window. This file has a .fpff extension which after doing a google search appears to be the Forensics Playground File Format.
 
-7.
+
+7. From the chat message chain, the two hackers are planning on meeting eachother tomorrow at 1500. 
 
 ### Part 2 (55 Pts)
 
