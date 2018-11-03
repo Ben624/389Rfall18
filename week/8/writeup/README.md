@@ -92,4 +92,15 @@ thanks, see you tomorrow
 *Type:DWORDS -- Section:11*:
 `[4, 8, 15, 16, 23, 42]`
 
-5. The PNG image gives you the flag `CMSC389R-{c0rn3rst0ne_airlin3s_to_the_m00n}`. To get this valid PNG to save, I realized that the File Signature was missing. To fix this issue, I addded the signature `(0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A)` in front of the struct.unpack for the PNG image. 
+5.
+
+
+`CMSC389R-{c0rn3rst0ne_airlin3s_to_the_m00n}` This flag was found in the PNG image. To get the PNG image to save to a valid file, I realized that I needed to add the PNG signature *(0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A)* before struct.unpack.
+
+`CMSC389R-{h1dd3n-s3ct10n-1n-f1l3}` I found this flag while trying to decode the ascii from section 10. I found a website that encodes/decodes base64, then copied in the ascii string.
+
+`HACKERSWIN` - The first thing I thought of to get a flag was to try calling the number *(422) 537 - 7946* since it was the output from ASCII section 1. Unfortunately, the phone number was invalid. However, I did notice that the number does line up with HACKERSWIN on a regular phone keypad
+
+(4 -> G**H**I) (2 -> **A**BC) (2 -> AB**C**) (5 -> J**K**L)(3 -> D**E**F)(7 -> PQR**R**S)(7 -> PQR**S**)(9 -> **W**XYZ)(4 -> GH**I**)(6 -> M**N**O)
+
+`CMSC389R-{PlaIN_dIfF_FLAG}`. I found this flag while trying to figure out what was hidden in the Section 6 paragraph. I copied a few sentences of that paragraph into Google and found that the original version of the text is located on the Wikipedia page for Stegonography under the History section. I copied the text from section 6 and from the wikipedia page and saved them to text files. I then diff'd the two and saw that several changes were made. I noticed that some characters were either added or capitalized. I wrote out all of the changes and got the flag.  
