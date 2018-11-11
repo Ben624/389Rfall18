@@ -15,7 +15,7 @@ After reading the comments that were already included in stub.py, it seemed like
 
 After figuring out how to use `hashlib`, it was time to start coding. After seeing that the passwords come from a provided password list, I thought it would be a good idea to add a for loop that would go through all the passwords. So, I added `for word in wordlist:` before `for salt in salts:`.
 
-Next, I stripped the word to remove any unwanted leading or trailing characters with `word = word.strip()`. Then, after looking back at the provided `hashlib` documentation, I used the sha512 function to get the desired hash with `hsh = hashlib.sha512(salt+word).hexdigest()`. I did `salt+word` instead of just word since in the Readme it says *'each password is salted by pre-pending a single, lowercase character'*.
+Next, I stripped the word to remove any unwanted leading/trailing characters with `word = word.strip()`. Then, after looking back at the provided `hashlib` documentation, I used the sha512 function to get the desired hash with `hsh = hashlib.sha512(salt+word).hexdigest()`. I did `salt+word` instead of just word since in the Readme it says *'each password is salted by pre-pending a single, lowercase character'*.
 
 Next, I just checked if `hsh`(from above) was included in the list of hashes provided in the hashes file. If hsh was in hashes, I printed out the the Salt and Password. After running the program, I got the following results:
 
@@ -30,7 +30,7 @@ Salt:p  Password:pizza
 
 ### Part 2 (40 Pts)
 
-The first thing I decided to do with this part was plug in the given IP address and port into part2.py and run thr program just to see what would happen. I got the following message:
+The first thing I decided to do with this part was plug in the given IP address and port into part2.py and run the program just to see what would happen. I got the following message:
 
 ```
 =========================================
@@ -41,7 +41,7 @@ Find me the sha384 hash of JGkJGWZjEj
 
 After seeing this message and trying to enter several things into it, it seemed like this program was set up to continue asking for something like `Find me the [hash type] of [hash]` until you win the game. I thought the best way to handle this would be to use a regular expression. So, below the provided `s.connect` line, I added a `while True:` loop then moved `    data = s.recv(1024)` and `print(data)` into that loop.
 
-After thinking about it, it seems like the best structure for the while loop is to match the received data with the regex, then break out of the loop and end the program if the regex doesn't match, since that would indicate you have won the game. To accomplish this, I added the following lines of code below the print statement.
+After thinking about it, I decided that the best structure for the while loop is to match the received data with the regex, then break out of the loop and end the program if the regex doesn't match, since that would indicate you have won the game. To accomplish this, I added the following lines of code below the print statement.
 ```
 match = re.search(r'Find me the (\w+) hash of (\w+)', data)
 
