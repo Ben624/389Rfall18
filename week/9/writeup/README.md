@@ -29,3 +29,33 @@ Salt:p  Password:pizza
 
 
 ### Part 2 (40 Pts)
+
+The first thing I decided to do with this part was plug in the given IP address and port into part2.py and run thr program just to see what would happen. I got the following message:
+
+```
+=========================================
+Hello there! Welcome to my hash workshop.
+=========================================
+Find me the sha384 hash of JGkJGWZjEj
+```
+
+After seeing this message and trying to enter several things into it, it seemed like this program was set up to continue asking for something like `Find me the [hash type] of [hash]` until you win the game. I thought the best way to handle this would be to use a regular expression. So, below the provided `s.connect` line, I added a `while True:` loop then moved `    data = s.recv(1024)` and `print(data)` into that loop.
+
+After thinking about it, it seems like the best structure for the while loop is to match the received data with the regex, then break out of the loop and end the program if the regex doesn't match, since that would indicate you have won the game. To accomplish this, I added the following lines of code below the print statement.
+```
+match = re.search(r'Find me the (\w+) hash of (\w+)', data)
+
+  if not match:
+      print("Regex no longer matches. Exiting program...")
+      break
+```
+
+If that loop didn't break, that would mean that the received data matched the regex, which means the game is still going. I decided to use the `groups()` and `getattr()` functions to generate a valid 'guess' that would be sent through the socket. The following lines accomplished this.
+
+```
+hash, target = match.groups()
+guess = getattr(hashlib, hash)(target).hexdigest()
+s.send(guess + '\n')
+```
+
+After finishing that, I ran the program and got the following output at the end: `You win! CMSC389R-{H4sh-5l!ngInG-h@sH3r}`.
