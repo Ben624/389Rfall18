@@ -16,7 +16,7 @@ For this part of the assignment, the first thing that I did was execute `nc 142.
 
 After that, I sent a *1* to select the first option in the notary followed by the message `CMSC389R Rocks!` since it was the message used in the example on the slides. Then, I then receivd the data, split it, and saved that as *legit*. I also made up a malicious string.
 
-Next, I moved on to the *Craft Payload* section. After reviewing the slides, I figured figured out how to correctly craft the payload. I added the following lines in the second section (BITS = 64)(HASH_LOW = 6):
+Next, I moved on to the *Craft Payload* section. After reviewing the slides, I figured figured out how to correctly craft the payload. I added the following lines in the second section (BITS = 64) (HASH_LOW = 6):
 
 ```
 padding = '\x80'
@@ -44,7 +44,19 @@ CMSC389R-{i_still_put_the_M_between_the_DV}
 Made in Maryland - Substantial
 ```
 
+```
+Legit: 3e712579cf19ab4f68ea69ce2044c176
+Fake: cc161d4805dd305bb564b5a310e3525a
+Message: CMSC389R Rocks!
+Malicious: Ha Ha Ha. This is Malicious!
+Payload: CMSC389R Rocks!??Ha Ha Ha. This is Malicious!
+```
+
 Since we now have the flag `CMSC389R-{i_still_put_the_M_between_the_DV}`, we can move on to the next part of the assignment.
 
 
 ### Part 2 (30 Pts)
+
+Since all of the PGP commands are provided to us in the slides, this part of the assignment was fairly straightforward. The first thing I did was `gpg --gen-key` to generate the key. I entered in my name and e-mail address followed. I entered `gpg --list-secret-keys` as well just to make sure the key was generated. Then I imported the provided public key by doing `gpg --import pgpassignment.key`.
+
+Next, I created a message text file which will be encrypted. After creating the text file I executed `gpg -e -u “Ben Eisner” -r “UMD Cybersecurity Club” msg.txt`
