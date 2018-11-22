@@ -26,7 +26,7 @@ padding += struct.pack('<Q', ((HASH_LOW + len(message))*8))
 payload = message + padding + malicious
 ```
 
-Following that, I sent a *2* since we want to use the notary's *Test a signature's validity* option. I then sent/received the provided *fake_hash* followed by the *payload* that was just created. I then received the data. I then surrounded the entire section in a loop that goes from *HASH_LOW*(6) to *HASH_HIGH*(15). I also changed *HASH_LOW* in the padding code to i so it would be different for each iteration in the loop. I also added the following code at the bottom of the loop:
+Following that, I sent a *2* since we want to use the notary's *Test a signature's validity* option. I then sent/received the provided *fake_hash* followed by the *payload* that was just created. I then received the data then surrounded the entire section in a loop that goes from *HASH_LOW*(6) to *HASH_HIGH*(15). I also changed *HASH_LOW* in the padding code to i so it would be different for each iteration in the loop. I also added the following code at the bottom of the loop:
 
 ```
 if 'Hello,' not in data:
@@ -72,4 +72,4 @@ you may answer the next question with yes.
 
 Use this key anyway? (y/N) y
 ```
-This resulted in a new file *msg.txt.gpg* being generated. I finished the assignmeent by renaming the file to *message.private* and putting it in the writeup folder. 
+This resulted in a new file *msg.txt.gpg* being generated. I finished the assignment by renaming the file to *message.private* and putting it in the writeup folder. 
