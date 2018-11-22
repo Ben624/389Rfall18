@@ -57,9 +57,9 @@ Since we now have the flag `CMSC389R-{i_still_put_the_M_between_the_DV}`, we can
 
 ### Part 2 (30 Pts)
 
-Since all of the PGP commands are provided to us in the slides, this part of the assignment was fairly straightforward. The first thing I did was `gpg --gen-key` to generate the key. I entered in my name and e-mail address followed. I entered `gpg --list-secret-keys` as well just to make sure the key was generated. Then I imported the provided public key by doing `gpg --import pgpassignment.key`.
+Since all of the PGP commands are provided to us in the slides, this part of the assignment was fairly straightforward. The first thing I did was `gpg --gen-key` to generate the key. I then entered in my name and e-mail address. Next, I entered `gpg --list-secret-keys` as well just to make sure the key was generated. Then I imported the provided public key by doing `gpg --import pgpassignment.key`.
 
-Next, I created a message text file which will be encrypted. After creating the text file I executed `gpg -e -u "Ben Eisner" -r "UMD Cybersecurity Club" message.txt`. I got the following message after executing the command then typed *y*:
+Next, I created a message text file which will be encrypted. After creating the text file I executed `gpg -e -u "Ben Eisner" -r "UMD Cybersecurity Club" msg.txt`. I got the following message after executing the command then typed *y*:
 ```
 gpg: 37E0973B53D21CDC: There is no assurance this key belongs to the named user
 sub  rsa2048/37E0973B53D21CDC 2018-11-09 UMD Cybersecurity Club <president@csec.umiacs.umd.edu>
