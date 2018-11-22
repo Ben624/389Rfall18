@@ -1,18 +1,50 @@
 Writeup 10 - Crypto II
 =====
 
-Name: *PUT YOUR NAME HERE*
-Section: *PUT YOUR SECTION HERE*
+Name: *Ben Eisner*
+Section: *0201*
 
 I pledge on my honor that I have not given or received anyunauthorized assistance on this assignment or examination.
 
-Digital acknowledgement of honor pledge: *PUT YOUR NAME HERE*
+Digital acknowledgement of honor pledge: *Ben Eisner*
 
 ## Assignment 10 Writeup
 
 ### Part 1 (70 Pts)
 
+For this part of the assignment, the first thing that I did was execute `nc 142.93.118.186 1234` so I could understand how the notary works. After I understood how it functions, I started to write the `stub.py` code. I thought that using sockets would be better than manually having to send *fake_hash* and *payload*, so I started by adding the standard socket code that has been given to us in previous assignments.
+
+After that, I sent a *1* to select the first option in the notary followed by the message `CMSC389R Rocks!` since it was the message used in the example on the slides. Then, I then receivd the data, split it, and saved that as *legit*. I also made up a malicious string.
+
+Next, I moved on to the *Craft Payload* section. After reviewing the slides, I figured figured out how to correctly craft the payload. I added the following lines in the second section (BITS = 64)(HASH_LOW = 6):
+
+```
+padding = '\x80'
+next_pad = ('\x00' * (BITS - len(message) - i - 9))
+padding += next_pad
+padding += struct.pack('<Q', ((HASH_LOW + len(message))*8))
+payload = message + padding + malicious
+```
+
+Following that, I sent a *2* since we want to use the notary's *Test a signature's validity* option. I then sent/received the provided *fake_hash* followed by the *payload* that was just created. I then received the data. I then surrounded the entire section in a loop that goes from *HASH_LOW*(6) to *HASH_HIGH*(15). I also changed *HASH_LOW* in the padding code to i so it would be different for each iteration in the loop. I also added the following code at the bottom of the loop:
+
+```
+if 'Hello,' not in data:
+    break
+```
+If the received data does not contain *Hello,*, then it is different than the usual data that is returned, which means a flag was most likely found. After executing the program the following data was returned:
+
+```
+Now let me see...
+
+Wow... I've never signed this data before!
+This is crazy... I can't let anyone know that my service is broken!
+Hey, if I give you this flag, you better keep quiet about this!
+CMSC389R-{i_still_put_the_M_between_the_DV}
+Made in Maryland - Substantial
+```
+
+Since we now have the flag `CMSC389R-{i_still_put_the_M_between_the_DV}`, we can move on to the next part of the assignment.
+
 
 ### Part 2 (30 Pts)
-
-
